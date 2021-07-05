@@ -2,6 +2,7 @@ package br.com.zupacademy.gian.mercadolivre.usuario;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,7 @@ public class Usuario {
 	@NotNull
 	private LocalDateTime criadoEm = LocalDateTime.now();
 	
+	@Column(unique = true)
 	@NotNull
 	private String login;
 
