@@ -1,0 +1,47 @@
+package br.com.zupacademy.gian.mercadolivre.produto;
+
+import java.util.Set;
+
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.com.zupacademy.gian.mercadolivre.compartilhado.ErroDeFormularioDto;
+
+@RestController
+@RequestMapping("/produtos")
+public class ProdutoController {
+	
+	private ProdutoRepository produtoRepository;
+	private CaracteristicasProdutoRepository caracteristicasProdutoRepository;
+	
+	public ProdutoController(ProdutoRepository produtoRepository, 
+			CaracteristicasProdutoRepository caracteristicasProdutoRepository) {
+		this.produtoRepository = produtoRepository;
+		this.caracteristicasProdutoRepository = caracteristicasProdutoRepository;
+	}
+
+	@PostMapping
+	@Transactional
+	public ResponseEntity<?> cadastrar(@RequestBody @Valid NovoProdutoRequest request) {	
+		
+		if (request.temCaracteristicasIguais()) {
+			return ResponseEntity.badRequest().
+					body(new ErroDeFormularioDto("caracteristicas.nome", 
+							"há nomes de caracteristicas idênticos"));
+		}
+				
+		Produto produto = request.toModel();		
+		produtoRepository.save(produto);
+		
+		Set<CaracteristicasProduto> listaCaracteristicas = request.getListaCaracteristicas(produto);		
+		caracteristicasProdutoRepository.saveAll(listaCaracteristicas);
+		
+		return ResponseEntity.ok().build();		
+	}	
+}

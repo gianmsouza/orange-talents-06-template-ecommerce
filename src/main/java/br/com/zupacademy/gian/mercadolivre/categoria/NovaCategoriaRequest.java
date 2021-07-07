@@ -30,6 +30,12 @@ public class NovaCategoriaRequest {
 		}
 		
 		return categoria;
+	}	
+
+	public NovaCategoriaRequest(String nome, Long idCategoriaMae, boolean categoriaMaeEncontrada) {
+		this.nome = nome;
+		this.idCategoriaMae = idCategoriaMae;
+		this.categoriaMaeEncontrada = categoriaMaeEncontrada;
 	}
 
 	public String getNome() {

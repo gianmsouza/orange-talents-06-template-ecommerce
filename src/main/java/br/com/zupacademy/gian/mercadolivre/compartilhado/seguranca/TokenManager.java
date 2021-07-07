@@ -28,8 +28,13 @@ public class TokenManager {
 		final Date now = new Date();
 		final Date expiration = new Date(now.getTime() + this.expirationInMillis);
 
-		return Jwts.builder().setIssuer("Desafio jornada dev eficiente mercado livre").setSubject(user.getUsername())
-				.setIssuedAt(now).setExpiration(expiration).signWith(SignatureAlgorithm.HS256, this.secret).compact();
+		return Jwts.builder()
+				.setIssuer("Desafio jornada dev eficiente mercado livre")
+				.setSubject(user.getUsername())
+				.setIssuedAt(now)
+				.setExpiration(expiration)
+				.signWith(SignatureAlgorithm.HS256, this.secret)
+				.compact();
 	}
 
 	public boolean isValid(String jwt) {

@@ -21,6 +21,11 @@ public class NovoUsuarioRequest {
 		return new Usuario(login, senha);
 	} 
 	
+	public NovoUsuarioRequest(String login, String senha) {
+		this.login = login;
+		this.senha = senha;
+	}
+
 	public String getLogin() {
 		return login;
 	}
