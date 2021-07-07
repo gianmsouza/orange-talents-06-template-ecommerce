@@ -8,7 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import br.com.zupacademy.gian.mercadolivre.categoria.Categoria;
 
 @Entity
 public class Produto {
@@ -20,6 +23,9 @@ public class Produto {
 	private String nome;
 	private BigDecimal valor;
 	private Integer quantidade;
+	
+	@ManyToOne
+	private Categoria categoria;
 
 	@OneToMany(mappedBy = "produto")
 	private Set<CaracteristicasProduto> caracteristicas;
@@ -29,18 +35,20 @@ public class Produto {
 	@Deprecated
 	public Produto() {}	
 	
-	public Produto(String nome, BigDecimal valor, Integer quantidade) {
+	public Produto(String nome, BigDecimal valor, Integer quantidade, Categoria categoria) {
 		this.nome = nome;
 		this.valor = valor;
 		this.quantidade = quantidade;
+		this.categoria = categoria;
 	}
 
 	public Produto(String nome, BigDecimal valor, Integer quantidade, 
-			Set<CaracteristicasProduto> caracteristicas) {
+			Set<CaracteristicasProduto> caracteristicas, Categoria categoria) {
 		this.nome = nome;
 		this.valor = valor;
 		this.quantidade = quantidade;
 		this.caracteristicas = caracteristicas;
+		this.categoria = categoria;
 	}
 	
 	public Long getId() {
@@ -65,5 +73,9 @@ public class Produto {
 	
 	public LocalDateTime getDataCadastro() {
 		return dataCadastro;
+	}
+	
+	public Categoria getCategoria() {
+		return categoria;
 	}
 }

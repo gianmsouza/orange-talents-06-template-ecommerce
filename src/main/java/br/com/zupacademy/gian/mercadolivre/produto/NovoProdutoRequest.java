@@ -2,6 +2,7 @@ package br.com.zupacademy.gian.mercadolivre.produto;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import br.com.zupacademy.gian.mercadolivre.categoria.Categoria;
+import br.com.zupacademy.gian.mercadolivre.categoria.CategoriaRepository;
 import br.com.zupacademy.gian.mercadolivre.compartilhado.ExistsId;
 
 public class NovoProdutoRequest {
@@ -39,8 +41,11 @@ public class NovoProdutoRequest {
 	@ExistsId(domainClass = Categoria.class, fieldName = "id", message = "categoria não encontrada")
 	private Long idCategoria;
 	
-	public Produto toModel() {		
-		return new Produto(nome, valor, quantidade);
+	public Produto toModel(CategoriaRepository categoriaRepository) {	
+		
+		Optional<Categoria> categoria = categoriaRepository.findById(idCategoria);
+		
+		return new Produto(nome, valor, quantidade, categoria.get());
 	}	
 
 	public NovoProdutoRequest(String nome, BigDecimal valor,
