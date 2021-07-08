@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import br.com.zupacademy.gian.mercadolivre.categoria.Categoria;
+import br.com.zupacademy.gian.mercadolivre.usuario.Usuario;
 
 @Entity
 public class Produto {
@@ -26,6 +27,9 @@ public class Produto {
 	
 	@ManyToOne
 	private Categoria categoria;
+	
+	@ManyToOne
+	private Usuario usuario;
 
 	@OneToMany(mappedBy = "produto")
 	private Set<CaracteristicasProduto> caracteristicas;
@@ -35,20 +39,14 @@ public class Produto {
 	@Deprecated
 	public Produto() {}	
 	
-	public Produto(String nome, BigDecimal valor, Integer quantidade, Categoria categoria) {
+	public Produto(String nome, BigDecimal valor, 
+			Integer quantidade, Categoria categoria, 
+			Usuario usuario) {
 		this.nome = nome;
 		this.valor = valor;
 		this.quantidade = quantidade;
 		this.categoria = categoria;
-	}
-
-	public Produto(String nome, BigDecimal valor, Integer quantidade, 
-			Set<CaracteristicasProduto> caracteristicas, Categoria categoria) {
-		this.nome = nome;
-		this.valor = valor;
-		this.quantidade = quantidade;
-		this.caracteristicas = caracteristicas;
-		this.categoria = categoria;
+		this.usuario = usuario;
 	}
 	
 	public Long getId() {
@@ -77,5 +75,9 @@ public class Produto {
 	
 	public Categoria getCategoria() {
 		return categoria;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
 	}
 }

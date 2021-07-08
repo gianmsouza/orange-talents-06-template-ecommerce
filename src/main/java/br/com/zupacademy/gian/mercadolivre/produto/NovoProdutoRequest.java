@@ -15,6 +15,7 @@ import javax.validation.constraints.Size;
 import br.com.zupacademy.gian.mercadolivre.categoria.Categoria;
 import br.com.zupacademy.gian.mercadolivre.categoria.CategoriaRepository;
 import br.com.zupacademy.gian.mercadolivre.compartilhado.ExistsId;
+import br.com.zupacademy.gian.mercadolivre.compartilhado.UsuarioLogado;
 
 public class NovoProdutoRequest {
 
@@ -41,11 +42,11 @@ public class NovoProdutoRequest {
 	@ExistsId(domainClass = Categoria.class, fieldName = "id", message = "categoria não encontrada")
 	private Long idCategoria;
 	
-	public Produto toModel(CategoriaRepository categoriaRepository) {	
+	public Produto toModel(CategoriaRepository categoriaRepository, UsuarioLogado user) {	
 		
 		Optional<Categoria> categoria = categoriaRepository.findById(idCategoria);
 		
-		return new Produto(nome, valor, quantidade, categoria.get());
+		return new Produto(nome, valor, quantidade, categoria.get(), user.get());
 	}	
 
 	public NovoProdutoRequest(String nome, BigDecimal valor,
