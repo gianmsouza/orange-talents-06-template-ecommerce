@@ -1,4 +1,4 @@
-package br.com.zupacademy.gian.mercadolivre.imagensproduto;
+package br.com.zupacademy.gian.mercadolivre.produto.imagens;
 
 import java.util.List;
 import java.util.Set;
