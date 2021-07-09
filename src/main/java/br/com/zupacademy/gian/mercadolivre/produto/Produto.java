@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import br.com.zupacademy.gian.mercadolivre.categoria.Categoria;
 import br.com.zupacademy.gian.mercadolivre.usuario.Usuario;
@@ -30,6 +31,9 @@ public class Produto {
 	
 	@ManyToOne
 	private Usuario usuario;
+	
+	@NotNull
+	private String descricao;
 
 	@OneToMany(mappedBy = "produto")
 	private Set<CaracteristicasProduto> caracteristicas;
@@ -41,12 +45,13 @@ public class Produto {
 	
 	public Produto(String nome, BigDecimal valor, 
 			Integer quantidade, Categoria categoria, 
-			Usuario usuario) {
+			Usuario usuario, String descricao) {
 		this.nome = nome;
 		this.valor = valor;
 		this.quantidade = quantidade;
 		this.categoria = categoria;
 		this.usuario = usuario;
+		this.descricao = descricao;
 	}
 	
 	public Long getId() {
@@ -79,5 +84,9 @@ public class Produto {
 	
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public String getDescricao() {
+		return descricao;
 	}
 }

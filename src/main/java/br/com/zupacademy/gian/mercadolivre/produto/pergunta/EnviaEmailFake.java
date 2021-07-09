@@ -3,7 +3,7 @@ package br.com.zupacademy.gian.mercadolivre.produto.pergunta;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmailFake {
+public class EnviaEmailFake {
 	
 	//aqui enviar email de verdade :D
 	//se der tempo na semana, volto para tentar implementar

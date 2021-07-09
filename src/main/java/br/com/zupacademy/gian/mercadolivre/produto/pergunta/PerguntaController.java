@@ -21,9 +21,9 @@ public class PerguntaController {
 	
 	private PerguntaRepository perguntaRepository;
 	private ProdutoRepository produtoRepository;
-	private EmailFake emailFake;
+	private EnviaEmailFake emailFake;
 	
-	public PerguntaController(PerguntaRepository perguntaRepository, ProdutoRepository produtoRepository, EmailFake emailFake) {
+	public PerguntaController(PerguntaRepository perguntaRepository, ProdutoRepository produtoRepository, EnviaEmailFake emailFake) {
 		this.perguntaRepository = perguntaRepository;
 		this.produtoRepository = produtoRepository;
 		this.emailFake = emailFake;

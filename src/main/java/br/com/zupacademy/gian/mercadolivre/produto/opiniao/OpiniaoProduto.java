@@ -33,6 +33,10 @@ public class OpiniaoProduto {
 	@NotNull
 	@ManyToOne
 	private Produto produto;
+	
+	@Deprecated
+	public OpiniaoProduto() {
+	}
 
 	public OpiniaoProduto(Integer nota, String titulo, String descricao, Usuario usuario, Produto produto) {
 		this.nota = nota;
