@@ -89,4 +89,14 @@ public class Produto {
 	public String getDescricao() {
 		return descricao;
 	}
+
+	public boolean ajustarEstoque(Integer qtdeComprada) {
+		if (qtdeComprada > this.quantidade) {
+			return false;
+		}
+		
+		this.quantidade -= qtdeComprada;
+		
+		return true;
+	}
 }

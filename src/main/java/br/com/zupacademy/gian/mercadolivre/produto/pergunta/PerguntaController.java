@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.zupacademy.gian.mercadolivre.compartilhado.EnviaEmailFake;
 import br.com.zupacademy.gian.mercadolivre.compartilhado.ErroDeFormularioDto;
 import br.com.zupacademy.gian.mercadolivre.compartilhado.UsuarioLogado;
 import br.com.zupacademy.gian.mercadolivre.produto.Produto;
@@ -42,7 +43,7 @@ public class PerguntaController {
 		
 		Pergunta pergunta = request.toModel(produto.get(), user.get());
 		
-		emailFake.enviarEmail(pergunta);
+		emailFake.enviarEmailNovaPergunta(pergunta);
 		
 		perguntaRepository.save(pergunta);
 		
