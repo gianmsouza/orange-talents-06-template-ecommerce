@@ -1,6 +1,7 @@
 package br.com.zupacademy.gian.mercadolivre.compartilhado;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.zupacademy.gian.mercadolivre.produto.compra.Compra;
 import br.com.zupacademy.gian.mercadolivre.produto.pergunta.Pergunta;
@@ -26,5 +27,19 @@ public class EnviaEmailFake {
 		System.out.println("Quantidade: " + compra.getQuantidade());
 		System.out.println("Valor Unitário: " + compra.getValorProdutoNaCompra());
 		System.out.println("Fim da mensagem!");
+	}
+
+	public void enviarEmailPagamentoSucesso(Compra compra) {
+		System.out.println("Olá, seu pagamento foi aprovado :D");
+		System.out.println("Produto comprado: " + compra.getProduto().getNome());
+		System.out.println("Quantidade: " + compra.getQuantidade());
+		System.out.println("Valor Unitário: " + compra.getValorProdutoNaCompra());
+		System.out.println("Fim da mensagem!");	
+	}
+
+	public void enviarEmailPagamentoErro(Compra compra, UriComponentsBuilder uriComponentsBuilder) {
+		String urlRetorno = compra.getGatewayPagamento().criarUrlRetorno(compra, uriComponentsBuilder);
+		System.out.println("Olá, seu pagamento foi reprovado D:");
+		System.out.println("Faça uma nova tentativa de pagamento em: " + urlRetorno);
 	}
 }

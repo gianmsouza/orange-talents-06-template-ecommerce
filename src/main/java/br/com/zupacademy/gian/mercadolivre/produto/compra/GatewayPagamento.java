@@ -6,6 +6,7 @@ public enum GatewayPagamento {
 
 	PAYPAL {
 		@Override
+		public
 		String criarUrlRetorno(Compra compra, UriComponentsBuilder uriComponentsBuilder) {
 			String urlRetornoPaypal = uriComponentsBuilder.path("/retorno-paypal/{id}").buildAndExpand(compra.getId())
 					.toString();
@@ -15,6 +16,7 @@ public enum GatewayPagamento {
 	},
 	PAGSEGURO {
 		@Override
+		public
 		String criarUrlRetorno(Compra compra, UriComponentsBuilder uriComponentsBuilder) {
 			String urlRetornoPagseguro = uriComponentsBuilder.path("/retorno-pagseguro/{id}")
 					.buildAndExpand(compra.getId()).toString();
@@ -23,6 +25,6 @@ public enum GatewayPagamento {
 		}
 	};
 	
-	abstract String criarUrlRetorno(Compra compra,
+	public abstract String criarUrlRetorno(Compra compra,
 			UriComponentsBuilder uriComponentsBuilder);
 }
